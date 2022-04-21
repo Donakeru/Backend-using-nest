@@ -20,7 +20,7 @@ export class AuthenticationService {
   }
 
   async loggearUsuario(userObject: LoginAuthenticationDto) {
-    const { name, password} = userObject;
+    const { name, password } = userObject;
     const findName = await this.userModel.findOne({name: name});
 
     //Para generar errores http customizados hacemos uso del throw new seguido de la funcion Http Exception, indicaremos el mensaje de error y el codigo httpReq error
@@ -36,6 +36,8 @@ export class AuthenticationService {
       token: this.jwtService.sign(payload),
     }
 
+    //Al tener ya el generador de tokens procedemos a crear la estrategia y el guardian que seran la capa de proteccion de nuestras rutas. 1) Dirigirse al documento de estrategia
+    
     return data
   }
 
